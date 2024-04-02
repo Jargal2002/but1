@@ -69,7 +69,7 @@ public class calcu {
 				 
 			}
 		}
-		for (int year = startYear + 1 ; year <= endYear ; year++) {
+		for (int year = startYear + 1 ; year <= endYear ; year++) { //
 			for (int month = 1 ; month <= 5 ; month++) {
 				ajilsnOdor1 += workingDays(year , month);
 				  
@@ -421,6 +421,7 @@ System.out.println("------------------------------------------------------------
        System.out.println("3р асуулт");
        asuult31();
     }
+	 // 3;10
     
 
 }
