@@ -1,42 +1,42 @@
 package application;
 
-import java.util.Scanner;
-
-
 public class calcu {
-	//дадлага  2018 - 2022
-	public static  int dadlagaDays1(int startYear, int endYear ) {
-		int count = 0 ;
-		int dadlagaMin = 0 ;
-		for (int year = startYear ; year <= endYear ; year++) {
-			count++;	
+    public static String Oyutan2018(int startYear) {
+		
+		switch(startYear) {
+		case 2019 : case 2020 :case 2021 : case 2022:
+			return "Оюутан";
+		case 2018:
+			return "Оюутан";
+		default:
+			return "Сурагч";
 		}
-		dadlagaMin = ((count * 40 ) * 8 ) * 60 ;
 		
-		
-		return dadlagaMin;
 	}
-	//дадлага  1988 - 1993
-		public static  int dadlagaDays2(int startYear, int endYear ) {
-			int count = 0 ;
-			int dadlagaMin = 0 ;
-			for (int year = startYear ; year <= endYear ; year++) {
-				count++;	
-			}
-			dadlagaMin = (((count * 40 ) * 8 ) * 60)  + (((count * 8 ) * 6 ) * 60 );
+	
+	public static String Oyutan1988(int startYear) {
+		
+		switch(startYear) {
+		case 1993 :case 1989 : case 1990 :case 1991 : case 1992 :
 			
-			
-			return dadlagaMin;
+			return "Оюутан";
+		case 1988:
+			return "Оюутан";
+		default:
+			return "Сурагч";
 		}
 		
+	}
 	
-	//ажлын өдрийн тоолох 2018-2022
+	
+		
+	//ажлын өдрийн тоолох 2018 - 2022
 	public static int workingDays(int year , int month) {
 		int workingday = 0;
 		int daysInMonth = daysInMonth(year , month);
 		for(int day = 1 ; day <= daysInMonth ; day++) {
 			int dayOfWeek = dayOfWeek(year , month , day);
-			if(dayOfWeek != 0 && dayOfWeek != 6 ) {
+			if(dayOfWeek >= 1 && dayOfWeek <= 5 ) {
 				workingday ++;
 				
 			}
@@ -44,22 +44,22 @@ public class calcu {
 		return workingday;
 		
 	}
-	//ажлын өдрийн тоолох 1988-1993
-		public static int workingDays1(int year , int month) {
-			int workingday = 0;
-			int daysInMonth = daysInMonth(year , month);
-			for(int day = 1 ; day <= daysInMonth ; day++) {
-				int dayOfWeek = dayOfWeek(year , month , day);
-				if(dayOfWeek != 0 ) {
-					workingday ++;
-					
-				}
-			}
-			return workingday;
-			
-		}
+	//ажлын өдрийн тоолох  1988 - 1993
+	public static int workingDays1(int year, int month) {
+        int workingday = 0;
+        int daysInMonth = daysInMonth(month, year);
+        for (int day = 1; day <= daysInMonth; day++) {
+            int dayOfWeek = dayOfWeek(year, month, day);
+            if (dayOfWeek >= 1 && dayOfWeek <= 6) {
+                workingday++;
+            }
+        }
+        return workingday;
+        
+
+    }
 	
-	//ажлын өдрийг тооцох 2018-2022
+	//ажлын өдрийг тооцох 2018 - 2022
 	public static int WorkDay(int startYear , int endYear) {
 		int ajilsnOdor = 0 ;
 		int ajilsnOdor1 = 0;
@@ -79,11 +79,11 @@ public class calcu {
 	return (ajilsnOdor+ajilsnOdor1);
 	}
 	
-	//ажлын өдрийг тооцох 2 1988-1993
+	//ажлын өдрийг тооцох  1988 - 1993
 		public static int WorkDay1(int startYear , int endYear) {
 			int ajilsnOdor = 0 ;
 			int ajilsnOdor1 = 0;
-			for (int year = startYear ; year <= endYear - 1 ; year++) {
+			for (int year = startYear ; year <= endYear -1 ; year++) {
 				for (int month = 9 ; month <= 12 ; month++) {
 					ajilsnOdor += workingDays1(year , month);
 					 
@@ -98,14 +98,9 @@ public class calcu {
 			
 		return (ajilsnOdor+ajilsnOdor1);
 		}
-		//амралтын өдөр тооцоолох 
-		 public static boolean isWeekend(int year, int month, int day) {
-		        int dayOfWeek = dayOfWeek(year, month, day);
-		        return dayOfWeek == 6 || dayOfWeek == 0; // Saturday is 6, Sunday is 0
-	
-		    }
+		
+		
 
-	
 	
 	//жилийн тоо 
 	public static int daysInYear(int year) {
@@ -124,7 +119,44 @@ public class calcu {
         }
         
     }
-	
+	//1988 - 1993 амралтын өдөр тооцох
+	public static int Amralt(int startYear , int endYear) {
+		int amraltOdor = 0 ;
+		int amraltOdor1 = 0;
+		for (int year = startYear ; year <= endYear -1 ; year++) {
+			for (int month = 9 ; month <= 12 ; month++) {
+				amraltOdor += daysInMonth(month , year)- workingDays1(year , month);
+				 
+			}
+		}
+		for (int year = startYear + 1 ; year <= endYear ; year++) {
+			for (int month = 1 ; month <= 5 ; month++) {
+				amraltOdor1+= daysInMonth(month , year)- workingDays1(year , month);
+				  
+			}
+		}
+		
+	return (amraltOdor+amraltOdor1);
+	}
+	//2006 - 2018 амралтын өдөр тооцох
+		public static int Amralt1(int startYear , int endYear) {
+			int amraltOdor = 0 ;
+			int amraltOdor1 = 0;
+			for (int year = startYear ; year <= endYear -1 ; year++) {
+				for (int month = 9 ; month <= 12 ; month++) {
+					amraltOdor += daysInMonth(month , year)- workingDays(year , month);
+					 
+				}
+			}
+			for (int year = startYear + 1 ; year <= endYear ; year++) {
+				for (int month = 1 ; month <= 5 ; month++) {
+					amraltOdor1+= daysInMonth(month , year)- workingDays(year , month);
+					  
+				}
+			}
+			
+		return (amraltOdor+amraltOdor1);
+		}
 	
 	//өндөр жил тооцоолох
 	public static boolean isLeapYear(int year) {
@@ -137,179 +169,258 @@ public class calcu {
     int d = (day + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12) % 7;
     return d;
 	 }
-	 //2006 оноос 2022 хүртэл 
-	 public static int baga(int startYear, int endYear) {
-		int studyMin = 0 ;
-		
-		studyMin = (WorkDay(startYear , endYear) * 4 ) * 30 ;
-		
-		return studyMin;
-	 }
-	 public static int ahlah(int startYear , int endYear) {
-		 int studyMin = 0 ;
-		  return studyMin = (WorkDay(startYear , endYear) * 6 )*35;
+	 //1978 - 1993
+	 public static String angi(int year) {
+		 switch(year) {
+		 case 1978:
+			 return "1";
+		 case 1979:
+			 return "2";
+		 case 1980:
+			 return "3";
+		 case 1981:
+			 return "4";
+		 case 1982:
+			 return "5";
+		 case 1983:
+			 return "6";
+		 case 1984:
+			 return "7";
+		 case 1985:
+			 return "8";
+		 case 1986:
+			 return "9";
+		 case 1987:
+			 return "10";
 		 
-	 }
-	 public static int deed(int startYear , int endYear) {
-		 int studyMin = 0 ;
-		 int count = endYear- startYear;
-		  return studyMin = ((WorkDay(startYear , endYear)-(count*40)) * 3)*90;
-		 
-	 }
-	 
-	 
-	 //1978 - 1993 
-	 public static int baga1 (int startYear , int endYear) {
-		 int studyMin = 0 ;
-			
-			studyMin = ((WorkDay1(startYear , endYear) * 6 )*34) * 45 ;
-			
-			return studyMin;
-	 } 
-	 public static int dund1(int startYear , int endYear) {
-		 int studyMin = 0 ;
-		  return studyMin = ((WorkDay1(startYear , endYear) /6 )*34)*45;
-		 
-	 }
-	 public static int ahlah1(int startYear , int endYear) {
-		 int studyMin = 0 ;
-		  return studyMin = (WorkDay1(startYear , endYear) * 6 )*45;
-		 
-	 }
-	 public static int deed1(int startYear , int endYear) {
-		 int studyMin = 0 ;
-		 int count = endYear-startYear;
-		  return studyMin = ((WorkDay1(startYear , endYear)-(count*48)) * 3) *90;
-		 
-	 }
-	 public static int sonirholtoitsag1(int startYear , int endYear) {
-		 int sortsag = 0 ;
-		 return sortsag = ((WorkDay1(startYear , endYear)/6)*4) * 60;
-	 }
-	 
-	 public static int sonirholtoitsag(int startYear , int endYear) {
-		 int sortsag = 0 ;
-		 return sortsag = ((WorkDay(startYear , endYear)/5)*4) * 60;
-	 }
-	 
-	 
-	 public static void asuult1() {
-		 int deedSursnTsag1 =  deed(2018 , 2022) -  dadlagaDays1(2018 , 2022) ;
-		 int deedSursnTsag2 = deed1(1988 , 1993) -  dadlagaDays2(1988 , 1993);
-		 int ih = 0;
-		 int dund_sur1 = baga(2006 , 2011)+ ahlah(2011 , 2018) ;
-		 
-		 int dund_sur2 = baga1(1978 , 1981) + ahlah1(1981 , 1986) + dund1(1986 , 1988);
-		 
-		 
-	     int deed_sur1 = deed(2018 , 2022);
-	    
-		 int deed_sur2 = deed1(1988 , 1993);
-		 
-		 
-		 if (dund_sur1 > dund_sur2) {
-			 System.out.println("2006 - 2018 онуудын дунд сургуулийн суралцах цаг их байна");
-			 
-		 }else {
-			 System.out.println("1978 - 1988 онуудын дунд сургуулийн суралцах цаг их байна");
+			 default:
+				 return "-";
 		 }
 		 
-		 if (deed_sur1 > deed_sur2) {
-			 System.out.println("2006 - 2018 онуудын дээд сургуулийн суралцах цаг их байна");
-			 
-		 }else {
-			 System.out.println("1988 - 1993 онуудын дээд сургуулийн суралцах цаг их байна");
-		 }
-		 System.out.println("Дунд сур нийт сурсан хугацаа(2006-2018) " + dund_sur1);
-		 System.out.println("Дунд сур нийт сурсан хугацаа(1978-1988) " + dund_sur2 );
-		 System.out.println("Их сур нийт сурсан хугацаа(2018-2022) " +deed_sur1);
-		 System.out.println("Их сур нийт сурсан хугацаа(1988-1993) " +deed_sur2);
-		 System.out.println( "2006 - 2011 (1-5 анги)оны хооронд ажлын 5 өдөр 4 цаг хичээллэсэн минут = " + baga(2006 , 2011));
-	     System.out.println( "2011 - 2018 (6-12 анги)оны хооронд ажлын 5 өдөр 6 цаг хичээллэсэн минут = " + ahlah(2011 , 2018));
-	     System.out.println( "2018 - 2022(их сургууль) оны хооронд ажлын 5 өдөр 3 цаг хичээллэсэн минут = "  + deedSursnTsag1 );
-	     
-	     
-	     
-
-	     System.out.println( "1978 - 1981(1-3 анги) оны хооронд ажлын 6 өдөр 4 цаг хичээллэсэн минут = " + baga1(1978 , 1981));
-	     System.out.println( "1981 - 1986(4-8 анги) оны хооронд ажлын 6 өдөр 4 цаг хичээллэсэн минут = " + ahlah1(1981 , 1986));
-	     System.out.println( "1986 - 1988 (9-10 анги)оны хооронд ажлын 6 өдөр 6 цаг хичээллэсэн минут = " + dund1(1986 , 1988));
-	     System.out.println( "1988 - 1993 (их сургууль)оны хооронд ажлын 6 өдөр 3 цаг хичээллэсэн минут = " + deedSursnTsag2);
-		
 	 }
-	 public static void asuult2() {
+	 //2006 - 2018
+	 public static String angi1(int year) {
+		 switch(year) {
+		 case 2006:
+			 return "1";
+		 case 2007:
+			 return "2";
+		 case 2008:
+			 return "3";
+		 case 2009:
+			 return "4";
+		 case 2010:
+			 return "5";
+		 case 2011:
+			 return "6";
+		 case 2012:
+			 return "7";
+		 case 2013:
+			 return "8";
+		 case 2014:
+			 return "9";
+		 case 2015:
+			 return "10";
+		 case 2016:
+			 return "11";
+		 case 2017:
+			 return "12";
+			 
 		 
-		 int dund_sur1 = baga(2006 , 2011)+ ahlah(2011 , 2018) ;
-		 int dund_sur2 = baga1(1978 , 1981) + ahlah1(1981 , 1986) + dund1(1986 , 1988);
+			 default:
+				 return "-";
+		 }
 		 
-		 int dund_sor1 = sonirholtoitsag1(2006 , 2018);
-		 int dund_sor2 = sonirholtoitsag(1978 , 1988);
+	 }
+	 
+	//2006 - 2018
+	 public static String hicheelTsag1(int year) {
+		 switch(year) {
+		 case 2006:case 2007:case 2008: case 2009: case 2010:
+			 return "20";
+		 case 2011: case 2012:case 2013: case 2014:case 2015: case 2016:case 2017:
+			 return "30";
+		 case 2018: case 2019: case 2020:case 2021:case 2022:
+			 return"15";
+			
+			 default:
+				 return "-";
+		 }
 		 
-		
-		
-		  if (dund_sor2 < dund_sor1) {
-			  System.out.println("2006 - 2018 он  сонирхолтой хичээл үзсэн цаг " + dund_sor2 + " их байна");  
-		  }
-		  else {
-			  System.out.println("2006 - 2018 он  сонирхолтой хичээл үзсэн цаг "  + dund_sor1 + " их байна");
-			  
-		  }
-		  System.out.println("2006 - 2018 он  сонирхолтой хичээл үзсэн цаг " + dund_sor2 + " хичээл үзсэн цаг " + dund_sur1);
-			 System.out.println("1978 - 1988 он  сонирхолтой хичээл үзсэн цаг " + dund_sor1 + " хичээл үзсэн цаг " + dund_sur2);
+	 }
+	 
+	//2006 - 2018
+		 public static String hicheelminut1(int year) {
+			 switch(year) {
+			 case 2006:case 2007:case 2008: case 2009: case 2010:
+				 return "30";
+			 case 2011: case 2012:case 2013: case 2014:case 2015: case 2016: case 2017:
+				 return "35";
+			 case 2018: case 2019: case 2020:case 2021:case 2022:
+				 return"90";
+				
+				 default:
+					 return "-";
+			 }
+			 
+		 }
+	 //1978 - 1993
+	 public static String hicheelTsag(int year) {
+		 switch(year) {
+		 case 1978:case 1979:case 1980:
+			 return "24";
+		 case 1981:case 1982:case 1983: case 1984:case 1985:
+			 return "34";
+		 case 1986: case 1987:
+			 return"36";
+			 case 1988: case 1989: case 1990: case 1991:case 1992:
+		 case 1993:
+			 return "18";
+			 default:
+				 return "-";
+		 }
+		 
+	 }
+	 //1978 - 1993
+	 public static String hicheelminut(int year) {
+		 switch(year) {
+		 case 1978:case 1979:case 1980:
+			
+		 case 1981:case 1982:case 1983: case 1984:case 1985:
+			 
+		 case 1986: case 1987:
+		 return "45";
+		 case 1988:
+		  case 1989: case 1990: case 1991:case 1992:
+		 case 1993:
+			 return "90";
+			 default:
+				 return "-";
+		 }
+		 
+	 }
+	 
+	//2006 - 2018
+		 public static String dadlaga1(int year) {
+			 switch(year) {
+			
+			  case 2018: case 2019: case 2020:case 2021:
+			 case 2022:
+				 return "40 цаг";
+				 default:
+					 return "-";
+			 } }
+	 
+	//1989 - 1993 
+	 public static String dadlaga(int year) {
+		 switch(year) {
+		 case 1988:
+		  case 1989: case 1990: case 1991:case 1992:
+		 case 1993:
+			 return "46 цаг";
+			 default:
+				 return "-";
+		 } }
+	 
+	 public static void asuult2()
+	 {
 		  
+		int day = WorkDay1(1978 ,1988) / 7 ;
+		System.out.println("         -1978 - 1988 он хүртэл " + day +" н 7 хоног байна үүнд 7 хоног бүр 4н цаг сонирхолтой хичээл үзсэн гэвэл " + day * 4 + " цаг " );
+		int day1 = WorkDay1(1978 , 1981)/7;
+		int day2 = WorkDay1(1981 , 1986)/7;
+		int day3 = WorkDay1(1986 , 1988)/7;
+		int tsag1 = day1 * 18 + day2 * 25 + day3 * 27;
+		System.out.println("         -1978 - 1988 он хүртэл " + day +" н 7 хоног байна үүнд 7 хоног бүр хичээлийн цагийг тооцвол " + tsag1 + " цаг " );
+	 }  
+	 public static void asuult21() {
+		 int day = WorkDay(2006 ,2018) / 7 ;
+			System.out.println("         -2006 - 2018 он хүртэл " + day +" н 7 хоног байна үүнд 7 хоног бүр 4н цаг сонирхолтой хичээл үзсэн гэвэл " + day * 4 + " цаг " );
+			int day1 = WorkDay(2006 , 2011)/7;
+			int day2 = WorkDay(2011 , 2018)/7;
+			
+			int tsag1 = day1 * 10 + day2 * 17 ;
+			System.out.println("         -2006 - 2018 он хүртэл " + day +" н 7 хоног байна үүнд 7 хоног бүр хичээлийн цагийг тооцвол " + tsag1 + " цаг " );
 		 
+			
 	 }
-	 //Хэрэв дээд сургуульд оюутан бүр хичээлийн дундуур 1 удаа 8 долоо хоногийн
-	// үйлдвэрлэлийн дадлага хийдэг байсан бол дадлагын цагийн суралцах хугацаанд нь эзлэх
-	 //хувийг тус тус олно уу.
-	
-	 public static void asuuult3() {
-		 double a= ((double)dadlagaDays1(2018, 2022)/deed(2018, 2022))*100;
-		 String formattedResult= String.format("%.2f", a);
-		 System.out.println("2018 - 2022 Дээд сургуулийн сурсан хугацааны дундуур дадлага хийсэн хугацааы харьцуулалт  "  + formattedResult + "% байна ") ;
-		 
-		 
-		 int deedSursnTsag2 = deed1(1988 , 1993) -  dadlagaDays2(1988 , 1993);
-		 double b = ((double) dadlagaDays2(1988 , 1993 ) / deed1(1988, 1993)) * 100  ;
-			String formattedResult2 = String.format("%.2f", b);
-			 System.out.println("1988 - 1993 Дээд сургуулийн сурсан хугацааны дундуур дадлага хийсэн хугацааы харьцуулалт  "  + formattedResult2 + "% байна ") ;
-		 
-		 
-		 
+	 public static void asuult3() {
+		 double dadlaga = 46;
+     System.out.println("       - Оюутан 5 н жилийн хугацаанд " + dadlaga*5 + " цаг дадлага хийнэ");
+	 double day = 	 WorkDay1(1988 , 1993) / 7 - 5 ;
+	 double hari =0;
+	 hari=((dadlaga*5) / (day * 27)) * 100 ;
+	 System.out.println("       - Оюутан 5 н жилийн хугацаанд " + day * 27 + " цаг суралцана ");
+	 System.out.println("       - Оюутан 5 н жилийн хугацаанд дадлага хийсэн цагийн харьцуулалт нь " +hari+ "% байна");
+	 }
+	 public static void asuult31() {
+		 double dadlaga = 40;
+     System.out.println("       - Оюутан 4 н жилийн хугацаанд " + dadlaga*4 + " цаг дадлага хийнэ");
+	 double day = 	 WorkDay(2018 , 2022) / 7 - 4 ;
+	 double hari = ((dadlaga*4) / (day * 22)) * 100 ;
+	 System.out.println("       - Оюутан 4 н жилийн хугацаанд " + day * 22 + " цаг суралцана ");
+	 System.out.println("       - Оюутан 4 н жилийн хугацаанд дадлага хийсэн цагийн харьцуулалт нь " +hari+ "% байна");
 	 }
 	 
-public static void main(String[] args) {
-		
-	        Scanner sc = new Scanner(System.in);
-	        int choice = 0;
-	        boolean ch = true;
-	        while (ch) {
-	            System.out.println("1.Суралцсан хугацааны харьцуулалт");
-	            System.out.println("2.Сонирхсон хичээлийн цагийн харьцуулалт");
-	            System.out.println("3.Дадлагийн цагийн эзлэх хувь");
-	            System.out.println("4.Таны оруулсан мэдээлэл байхгүй байна.");
-	            choice = sc.nextInt();
-	            switch (choice) {
-	                case 1:
-	                    System.out.println("1.Суралцсан хугацааны харьцуулалт");
-	                    asuult1();
-	                    break;
-	                case 2:
-	                    System.out.println("2.Сонирхсон хичээлийн цагийн харьцуулалт");
-	                    asuult2();
-	                    break;
-	                case 3:
-	                    System.out.println("3.Дадлагийн цагийн эзлэх хувь");
-	                    asuuult3();
-	                    break;
-	                case 4:
-	                    System.out.println("4.Гарах");
-	                    ch = false;
-	                    break;
-	            }
-	        }
-	        sc.close();
-	    }
-	}
+	 public static void main(String[] args) {
 
-	
+		
+            int startYear = 1978 ; 
+             int endYear = 1992;
+	        
+ 	        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+	        System.out.printf("| %8s | %-5s | %-4s | %-8s | %-9s | %-7s | %-15s | %-10s | %-12s |%-13s |%-8s |%n",
+	                          "Он", "Статус", "Анги", "Амралт", "Хичээл", "Ажлын ", "Хичээлийн цаг", "1 хичээл", "7 хоногт", "7 хоногт(цаг)","Дадлага","");
+	        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+
+	        // Outer loop for rows
+	      
+	            	for(int a = startYear ; a <= endYear ; a ++) {
+	            		int nextYear = a + 1;
+	            		
+	                System.out.printf("| %8s| %-5s | %-4s | %-8s | %-9s | %-7s | %-15s | %-10s | %-12s |%-13s |%-8s |%n",
+	                                  a +"-"+ nextYear ,  Oyutan1988(a) , angi(a) , Amralt(a , nextYear)+" хоног", WorkDay1(a , nextYear)+" хоног", 6 +"өдөр", hicheelTsag(a)+"(7 хоногт)", hicheelminut(a)+" (минут)",Integer.parseInt( hicheelTsag(a))* Integer.parseInt(hicheelminut(a))+" (минут)",( Integer.parseInt( hicheelTsag(a))* Integer.parseInt(hicheelminut(a)))/60+" (цаг)",dadlaga(a));
+	            	}
+	    	        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+	        
+	        
+	           
+System.out.println("1р асуулт");
+System.out.println("    - 1978 аас 1988 оны хооронд 10 жил суралцсан хугацааг 7 хоногийн байдлаар тооцоолвол 233 цаг");
+System.out.println("    - 1988 аас 1993 онд суралцсан хугацааг 7 хоногоор тооцоолвол 135 цаг");
+
+System.out.println("2р асуулт");
+asuult2();
+
+System.out.println("3р асуулт");
+asuult3();
+
+int startYear1 = 2006 ; 
+int endYear1 = 2021;
+
+System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+System.out.printf("| %8s | %-5s | %-4s | %-8s | %-9s | %-7s | %-15s | %-10s | %-12s |%-13s |%-8s |%n",
+                 "Он", "Статус", "Анги", "Амралт", "Хичээл", "Ажлын ", "Хичээлийн цаг", "1 хичээл", "7 хоногт", "7 хоногт(цаг)","Дадлага","");
+System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
+
+// Outer loop for rows
+
+   	for(int a = startYear1 ; a <= endYear1 ; a ++) {
+   		int nextYear1 = a + 1;
+   		
+       System.out.printf("| %8s| %-5s | %-4s | %-8s | %-9s | %-7s | %-15s | %-10s | %-12s |%-13s |%-8s |%n",
+                         a +"-"+ nextYear1 ,  Oyutan2018(a) , angi1(a) , Amralt1(a , nextYear1)+" хоног", WorkDay(a , nextYear1)+" хоног", 5 +"өдөр", hicheelTsag1(a)+"(7 хоногт)", hicheelminut1(a)+" (минут)",Integer.parseInt( hicheelTsag1(a))* Integer.parseInt(hicheelminut1(a))+" (минут)",( Integer.parseInt( hicheelTsag1(a))* Integer.parseInt(hicheelminut1(a)))/60+" (цаг)",dadlaga1(a));
+   	}
+       System.out.println("------------------------------------------------------------------------------------------------------------------------------------");   
+       System.out.println("1р асуулт");
+       System.out.println("    - 2006 аас 2018 оны хооронд 12 жил суралцсан хугацааг 7 хоногийн байдлаар тооцоолвол 169 цаг");
+       System.out.println("    - 2018 аас 2022 онд суралцсан хугацааг 7 хоногоор тооцоолвол 88 цаг");
+       System.out.println("2р асуулт");
+       asuult21();
+       
+       System.out.println("3р асуулт");
+       asuult31();
+    }
+    
+
+}
