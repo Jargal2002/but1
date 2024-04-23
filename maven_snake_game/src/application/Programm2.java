@@ -12,7 +12,7 @@ class Retired {
     private String position;
     private String status;
 
-    // Constructor
+    
     public Retired(String name, String employeeCode, String position, String status) {
         this.name = name;
         this.employeeCode = employeeCode;
@@ -20,7 +20,7 @@ class Retired {
         this.status = status;
     }
 
-    // Getters
+    
     public String getName() {
         return name;
     }
@@ -33,11 +33,12 @@ class Retired {
         return position;
     }
 
+    
     public String getStatus() {
         return status;
     }
 
-    @Override
+    
     public String toString() {
         return "Name: " + name +
                 ", Employee Code: " + employeeCode +
@@ -82,23 +83,25 @@ public class Programm2 extends Nomin {
             for (Employee employee : employees) {
                 darkanEmployees.add(new Darkan(employee.getName(), employee.getEmployeeCode(), employee.getPosition(), employee.getStatus()));
             }
+          employees.clear();
 
             
             for (Darkan darkanEmployee : darkanEmployees) {
-                if (darkanEmployee.getStatus().equalsIgnoreCase("тэтгэвэрт гарсан")) {
-                    Retired retiredEmployee = new Retired(darkanEmployee.getName(), darkanEmployee.getEmployeeCode(), darkanEmployee.getPosition(), darkanEmployee.getStatus());
-                    retiredEmployees.add(retiredEmployee);
+                if (!darkanEmployee.getStatus().equalsIgnoreCase("тэтгэвэрт гарсан")) {
+                    Employee employee = new Employee(darkanEmployee.getName(), darkanEmployee.getEmployeeCode(), darkanEmployee.getPosition(), darkanEmployee.getStatus());
+                    employees.add(employee);
                     
                     
             
                 }
             }
             System.out.println("Дарханы нөөц сервер лүү шилжсэн бүх ажилтануудын мэдээлэл");
+            
+            darkanEmployees.removeIf(darkanEmployee -> !darkanEmployee.getStatus().equalsIgnoreCase("тэтгэвэрт гарсан"));
             printDarkanInformation(darkanEmployees);
-            darkanEmployees.removeIf(darkanEmployee -> darkanEmployee.getStatus().equalsIgnoreCase("тэтгэвэрт гарсан"));
 
             
-            employees.clear();
+            
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + e.getMessage());
         }
@@ -117,11 +120,11 @@ public class Programm2 extends Nomin {
             choice = inputScanner.nextInt();
             switch (choice) {
                 case 1:
-                    printEmployeeInformation(employees);
+                	printEmployees(employees);
                     break;
                 case 2:
                     printDarkanInformation(darkanEmployees);
-                    printretiredEmployees(retiredEmployees);
+                    
                     break;
                 
                 case 3:
@@ -145,7 +148,7 @@ public class Programm2 extends Nomin {
     }
 
     private static void printDarkanInformation(List<Darkan> darkanEmployees) {
-    	System.out.println("|Энгийн ажилчид|");
+    	
         System.out.println("---------------------------------------------------------------------------------");
         System.out.printf("| %-20s | %-15s | %-20s | %-10s |\n", "Нэр", "Ажилтаны код", "Мэргэжил", "Төлөв");
         System.out.println("---------------------------------------------------------------------------------");
@@ -154,13 +157,13 @@ public class Programm2 extends Nomin {
         }
         System.out.println("---------------------------------------------------------------------------------");
     }
-    private static void printretiredEmployees(List<Retired> RetiredEmployees) {
-    	 System.out.println("|Тэтгэвэрт гарсан ажилчидын мэдээлэл|");
+    private static void printEmployees(List<Employee> employees) {
+    	 System.out.println("|Бүх ажилчдын мэдээлэл|");
         System.out.println("---------------------------------------------------------------------------------");
         System.out.printf("| %-20s | %-15s | %-20s | %-10s |\n", "Нэр", "Ажилтаны код", "Мэргэжил", "Төлөв");
         System.out.println("---------------------------------------------------------------------------------");
-        for (Retired retiredEmployee : RetiredEmployees) {
-            System.out.printf("| %-20s | %-15s | %-20s | %-10s |\n", retiredEmployee.getName(), retiredEmployee.getEmployeeCode(), retiredEmployee.getPosition(), retiredEmployee.getStatus());
+        for (Employee employee : employees) {
+            System.out.printf("| %-20s | %-15s | %-20s | %-10s |\n", employee.getName(), employee.getEmployeeCode(), employee.getPosition(), employee.getStatus());
         }
         System.out.println("---------------------------------------------------------------------------------");
     }
