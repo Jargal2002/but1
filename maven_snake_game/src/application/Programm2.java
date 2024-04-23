@@ -91,7 +91,7 @@ public class Programm2 extends Nomin {
                     Employee employee = new Employee(darkanEmployee.getName(), darkanEmployee.getEmployeeCode(), darkanEmployee.getPosition(), darkanEmployee.getStatus());
                     employees.add(employee);
                     
-                    
+                    //67
             
                 }
             }

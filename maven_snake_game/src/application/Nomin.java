@@ -126,7 +126,7 @@ public class Nomin {
                     darkanEmployees.add(new Darkan(employee.getName(), employee.getEmployeeCode(), employee.getPosition(), employee.getStatus()));
                 }
             }
-//
+//98
             
             employees.removeIf(employee -> employee.getStatus().equalsIgnoreCase("тэтгэвэрт гарсан"));
         } catch (FileNotFoundException e) {
